@@ -65,6 +65,8 @@ for epoch in range(num_epochs):
 
 print('Final training loss: {:.4f}'.format(loss_history[-1].item()))
 
+model.eval()
+
 # Test the model
 with torch.no_grad():
     correct = 0
