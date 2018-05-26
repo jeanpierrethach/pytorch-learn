@@ -18,7 +18,7 @@ num_epochs = 10
 batch_size = 100
 learning_rate = 1e-3
 
-train_loader, test_loader = get_mnist_dataset(100)
+train_loader, test_loader = get_mnist_dataset(batch_size)
 
 class NeuralNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
