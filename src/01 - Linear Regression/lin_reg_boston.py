@@ -5,16 +5,16 @@ import torch.nn as nn
 import numpy as np
 import matplotlib.pyplot as plt
 
-# HYperparameters
+# Hyperparameters
 input_size = 13
 output_size = 1
-num_epochs = 1000
+num_epochs = 10000
 learning_rate = 1e-6
 
 boston = load_boston()
 
-features = torch.from_numpy(np.array(boston.data)).float()
-labels = torch.from_numpy(np.array(boston.target)).float().view(-1,1)
+features = torch.from_numpy(boston.data).float()
+labels = torch.from_numpy(boston.target).float().view(-1,1)
 
 class LinearRegression(nn.Module):
     def __init__(self):
@@ -44,13 +44,13 @@ for epoch in range(num_epochs):
     loss.backward()
     optimizer.step()
 
-    if (epoch+1) % 20 == 0:
+    if (epoch+1) % 100 == 0:
         print('Epoch[{}/{}], loss: {:.6f}'.format(epoch+1, num_epochs, loss.item()))
 
 model.eval()
 
 predicted = model(features).detach().numpy()
-labels = np.array(boston.target)
+labels = boston.target
 
 fig, ax = plt.subplots()
 ax.scatter(labels, predicted)
